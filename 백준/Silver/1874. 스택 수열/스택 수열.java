@@ -6,46 +6,35 @@ public class Main {
 
         int n = input.nextInt(); // 배열의 숫자
         Deque<Integer> stack = new ArrayDeque<>();
-        Deque<Character> queue = new ArrayDeque<>();
+        StringBuilder sb = new StringBuilder();
 
-        int topPoint = 0;
+        int nextNum = 1;
 
+        boolean possible = true;
 
-        boolean result = true;
+        for (int i = 0; i <n; i++) {
+            int target = input.nextInt();
 
-        for (int i = 1; i <= n; i++) {
-            int data = input.nextInt();
-
-            while(topPoint < data){
-                stack.push(++topPoint);
-                queue.add('+');
+            while(nextNum <= target){
+                stack.push(nextNum++);
+                sb.append("+\n");
             }
 
-            while(!stack.isEmpty()){
-
-                if(stack.pop() == data){
-                    queue.add('-');
-                    break;
-                }
-                if(stack.peek() + 1 > data){
-                    result = false;
-                    break;
-                }
-
+            if(!stack.isEmpty() && stack.peek() == target){
+                stack.pop();
+                sb.append("-\n");
             }
-            if(result == false){
+            else{
+                System.out.println("NO");
+                possible = false;
                 break;
             }
+        }
+        if(possible){
+            System.out.println(sb);
+        }
 
-        }
-        if(result){
-            for (Character c : queue) {
-                System.out.println(c);
-            }
-        }
-        else{
-            System.out.println("NO");
-        }
+
 
         input.close();
 

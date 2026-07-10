@@ -1,27 +1,21 @@
-import java.util.Arrays;
+import java.util.ArrayList;
 
 class Solution {
     public String[] solution(String myStr) {
-        int count = 0;
-        for(String s : myStr.split("[abc]")){
-            if(!s.isEmpty()){
-                count++;
+        ArrayList <String> list = new ArrayList<>();
+
+        for (String s : myStr.split("[abc]")) {
+            if (!s.isEmpty()) {
+                list.add(s);
             }
         }
-
-        if(count == 0){
-            String [] answer = new String[1];
-            answer[0] = "EMPTY";
-            return answer;
+        
+        if(list.size() == 0){
+            return new String[] {"EMPTY"};
         }
-        String [] answer = new String[count];
-        int idx = 0;
-        for(String s : myStr.split("[abc]")){
-            if(!s.isEmpty()){
-                answer[idx++] = s;
-            }
-        }
+        
+    
 
-        return answer;
+        return list.toArray(new String[0]);
     }
 }

@@ -11,8 +11,7 @@ class Solution {
         for(int i = 0; i < wallpaper.length; i++){
             for(int j = 0; j < wallpaper[i].length(); j++){
                 char c = wallpaper[i].charAt(j);
-                for(int k = 0; k < 4; k++){
-                    if(c == '#'){
+                if(c == '#'){
                         if(i < answer[0]){
                             answer[0] = i;
                         }
@@ -26,7 +25,6 @@ class Solution {
                             answer[3] = j + 1;
                         }
                     }
-                }
             }
         }
         return answer;

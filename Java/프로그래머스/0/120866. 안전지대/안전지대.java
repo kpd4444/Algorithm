@@ -1,40 +1,40 @@
 class Solution {
     public int solution(int[][] board) {
         
-        int [][] danger = new int[board.length][board.length];
+        int n = board.length;
+        int [][] danger = new int[n][n];
         
-        for(int i = 0; i < board.length; i++){
-            for(int j = 0; j < board.length; j++){
+        int[] dr = {0, 1, 1, 1, 0, -1, -1, -1};
+        int[] dc = {1, 1, 0, -1, -1, -1, 0, 1};
+        
+        for(int i = 0; i < n; i++){
+            for(int j = 0; j < n; j++){
+                
                 if(board[i][j] == 1){
-                    int row = i;
-                    int column = j;
-                    for(int k = row - 1; k <= row + 1; k++){
-                        if(k < 0 || k > board.length - 1){
+                    danger[i][j] = 1;
+                    for(int k = 0; k < 8; k++){
+                        int nr = i + dr[k];
+                        int nc = j + dc[k];
+                    
+                        if(nr < 0 || nr >= n || nc < 0 || nc >= n){
                             continue;
                         }
-                        for(int l = column -1; l <= column + 1 ; l++){
-                            if(l < 0 || l > board.length - 1){
-                                continue;
-                            }
-                        
-                            danger[k][l] = 1;
-                        }
+                        danger[nr][nc] = 1;
                     }
-                    
                 }
+                
             }
         }
-        int answer = 0;
-        for(int i = 0; i < danger.length; i++){
-            for(int j = 0; j < danger.length; j++){
+        int count = 0;
+        for(int i = 0; i < n; i++){
+            for(int j = 0; j < n; j++){
                 if(danger[i][j] == 0){
-                    answer++;
+                    count++;
                 }
             }
         }
         
-        
-        return answer;
+        return count;
         
         
     }

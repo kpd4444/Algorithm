@@ -1,21 +1,18 @@
 class Solution {
     public int solution(int[][] lines) {
-        int answer = 0;
+        int[] check = new int[201];
         
-        int [] line = new int[200];
-        
-        for(int i = 0; i < 3; i++){
-            for(int j = lines[i][0]; j < lines[i][1]; j++){
-                line[j + 100]++;
+        for(int[] line : lines){
+            for(int i = line[0]; i < line[1]; i++){
+                check[i + 100]++;
             }
         }
-        
-        for(int i = 0; i < 200; i++){
-            if(line[i] >=2){
-                answer++;
+        int count = 0;
+        for(int i = 0; i <= 200; i++){
+            if(check[i] >= 2){
+                count++;
             }
         }
-        
-        return answer;
+        return count;
     }
 }

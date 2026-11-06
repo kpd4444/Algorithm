@@ -4,7 +4,6 @@ import java.util.Arrays;
 
 class Solution {
     public int solution(String[] friends, String[] gifts) {
-        int answer = 0;
         Map<String,Integer> map = new HashMap<>();
         int n = friends.length;
         for(int i = 0; i < n; i++){
@@ -22,13 +21,10 @@ class Solution {
         for(int i = 0; i < n; i++){
             for(int j = 0; j < n; j++){
                 present[i] += score[i][j];
-            }
-        }
-        for(int i = 0; i < n; i++){
-            for(int j = 0; j < n; j++){
                 present[i] -= score[j][i];
             }
         }
+    
         int[] count = new int[n];
         for(int i = 0; i < n; i++){
             for(int j = i + 1; j < n; j++){

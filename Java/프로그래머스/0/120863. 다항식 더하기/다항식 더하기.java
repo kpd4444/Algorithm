@@ -1,27 +1,32 @@
 class Solution {
     public String solution(String polynomial) {
-        String [] split = polynomial.split(" \\+ ");
-        int cons = 0;
+        String[] split = polynomial.split(" \\+ ");
         int x = 0;
+        int c = 0;
         
         for(String s : split){
-            if(!s.contains("x")){
-                cons += Integer.valueOf(s);
-            }
-            else{
+            if(s.contains("x")){
                 if(s.length() == 1){
-                    x++;
+                    x += 1;
                 }
                 else{
-                    x += Integer.valueOf(s.substring(0, s.length() - 1));
+                    s = s.substring(0, s.length() - 1);
+                    x += Integer.valueOf(s);
                 }
+            }
+            else{
+                c += Integer.valueOf(s);  
             }
         }
         
+        if(x == 0){
+            return String.valueOf(c);
+        }
+        else if(c == 0){
+            return x == 1 ? "x" : String.valueOf(x) + "x";
+        }
         
-        String result = (x != 0 ? (x == 1 ? "x" :  x +"x")  : "") + 
-            (cons != 0 ? (x == 0 ? cons : " + " + cons) : "");
         
-        return result;
+        return (x == 1 ? "" : String.valueOf(x)) + "x + " + String.valueOf(c); 
     }
 }

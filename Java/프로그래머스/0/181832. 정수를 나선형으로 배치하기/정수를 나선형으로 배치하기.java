@@ -1,49 +1,30 @@
 class Solution {
     public int[][] solution(int n) {
         int[][] answer = new int[n][n];
+        int[] dr = {0, 1, 0, -1};
+        int[] dc = {1, 0, -1, 0};
         
-        int column = 0;
-        int row = 0;
-        int mode = 0;  // 0 -> 오른쪽, 1 -> 아래 , 2 -> 왼쪽 , 3 -> 위
+        int r = 0;
+        int c = 0;
+        int index = 0;
         
         for(int i = 1; i <= n * n; i++){
-            answer[row][column] = i;
-            switch(mode){
-                case 0: //오른쪽으로 가고 있을때
-                    if(column + 1 >= n || answer[row][column + 1] != 0){
-                        mode = (mode + 1) % 4;
-                        row++;
-                        break;
-                    }
-                    column++;
+            answer[r][c] = i;
+            int nr = r + dr[index];
+            int nc = c + dc[index];
+            
+            while(nr < 0 || nr >= n || nc < 0 || nc >= n || answer[nr][nc] != 0){
+                if(i == n * n){
                     break;
-                case 1: //아래
-                    if(row + 1 >= n || answer[row + 1][column] != 0){
-                        mode = (mode + 1) % 4;
-                        column--;
-                        break;
-                    }
-                    row++;
-                    break;
-                case 2://왼쪽
-                    if(column - 1 < 0 || answer[row][column - 1] != 0){
-                        mode = (mode + 1) % 4;
-                        row--;
-                        break;
-                    }
-                    column--;
-                    break;
-                case 3: //위로 가고 있을때
-                    if(row - 1 < 0 || answer[row - 1][column] != 0){
-                        mode = (mode + 1) % 4;
-                        column++;
-                        break;
-                    }
-                    row--;
-                    break;
+                }
+                index++;
+                index = index == 4 ? 0 : index;
+                nr = r + dr[index];
+                nc = c + dc[index];
             }
+            r = nr;
+            c = nc;
         }
-        
         return answer;
     }
 }

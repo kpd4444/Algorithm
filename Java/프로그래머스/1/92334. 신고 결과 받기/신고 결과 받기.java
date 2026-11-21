@@ -15,8 +15,8 @@ class Solution {
             check.put(id_list[i], new HashSet<>());
         }
         
-        for(String re : report){
-            String[] split = re.split(" ");
+        for(String r : report){
+            String[] split = r.split(" ");
             String sender = split[0];
             String receiver = split[1];
             
